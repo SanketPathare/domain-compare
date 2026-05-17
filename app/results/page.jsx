@@ -201,7 +201,7 @@ function ResultsContent() {
           {loading ? (
             <SkeletonPriceTable />
           ) : (
-            pricing.length > 0 && (
+            pricing.length > 0 && availability && (
               <div className="space-y-4">
                 <div className="border-b border-[#1a1a1a] pb-4">
                   <span className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase select-none">
@@ -211,7 +211,7 @@ function ResultsContent() {
                     Registrar Comparisons
                   </h2>
                 </div>
-                <PriceTable results={pricing} domainName={domain} />
+                <PriceTable results={pricing} domainName={domain} isAvailable={availability} />
               </div>
             )
           )}

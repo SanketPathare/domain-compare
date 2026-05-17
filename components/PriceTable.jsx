@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { ArrowUpDown, ExternalLink, HelpCircle } from "lucide-react";
+import { ArrowUpDown, ExternalLink, HelpCircle, Lock } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 
 // Helper component to render stylized brand monogram matching vercel developer guides
@@ -37,7 +37,7 @@ function BrandLogo({ id, name, color }) {
   );
 }
 
-export default function PriceTable({ results = [], domainName = "" }) {
+export default function PriceTable({ results = [], domainName = "", isAvailable = true }) {
   const [sortBy, setSortBy] = useState("cheapest");
   const { formatPrice } = useTheme();
   
@@ -161,15 +161,24 @@ export default function PriceTable({ results = [], domainName = "" }) {
 
                 {/* Column 4: Buy Now Button */}
                 <div className="flex justify-end mt-2 md:mt-0">
-                  <a
-                    href={item.affiliate}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 w-full md:w-auto px-5 py-2.5 rounded-lg font-bold text-xs bg-white hover:bg-zinc-200 text-black transition-all duration-150 active:scale-95 text-center shadow-sm select-none"
-                  >
-                    <span>Register</span>
-                    <ExternalLink className="h-3 w-3 shrink-0" />
-                  </a>
+                  {isAvailable ? (
+                    <a
+                      href={item.affiliate}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1.5 w-full md:w-auto px-5 py-2.5 rounded-lg font-bold text-xs bg-white hover:bg-zinc-200 text-black transition-all duration-150 active:scale-95 text-center shadow-sm select-none"
+                    >
+                      <span>Register</span>
+                      <ExternalLink className="h-3 w-3 shrink-0" />
+                    </a>
+                  ) : (
+                    <div
+                      className="flex items-center justify-center gap-1.5 w-full md:w-auto px-5 py-2.5 rounded-lg font-bold text-xs bg-[#111] border border-[#222] text-zinc-500 text-center select-none cursor-not-allowed"
+                    >
+                      <span>Taken</span>
+                      <Lock className="h-3 w-3 shrink-0 text-zinc-650" />
+                    </div>
+                  )}
                 </div>
               </div>
             );
