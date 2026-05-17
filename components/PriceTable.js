@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { Star, ArrowUpDown, ChevronDown, Check, ExternalLink, HelpCircle } from "lucide-react";
+import { ArrowUpDown, ExternalLink, HelpCircle } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 
 // Helper component to render stylized brand monogram if static images are missing
@@ -39,7 +39,7 @@ function BrandLogo({ id, name, color }) {
 }
 
 export default function PriceTable({ results = [], domainName = "" }) {
-  const [sortBy, setSortBy] = useState("cheapest"); // "cheapest", "renew", "recommended"
+  const [sortBy, setSortBy] = useState("cheapest"); // "cheapest", "renew"
   const { formatPrice } = useTheme();
   
   // Sort the results array based on criteria
@@ -49,9 +49,6 @@ export default function PriceTable({ results = [], domainName = "" }) {
       return list.sort((a, b) => a.register - b.register);
     } else if (sortBy === "renew") {
       return list.sort((a, b) => a.renew - b.renew);
-    } else if (sortBy === "recommended") {
-      // Sort by rating descending
-      return list.sort((a, b) => b.rating - a.rating);
     }
     return list;
   }, [results, sortBy]);
@@ -61,31 +58,6 @@ export default function PriceTable({ results = [], domainName = "" }) {
     if (results.length === 0) return 0;
     return Math.min(...results.map(r => r.register));
   }, [results]);
-
-  // Star Rating Drawer
-  const renderStars = (rating) => {
-    const stars = [];
-    const floorRating = Math.floor(rating);
-    const hasHalf = rating % 1 >= 0.5;
-
-    for (let i = 1; i <= 5; i++) {
-      if (i <= floorRating) {
-        stars.push(<Star key={i} className="h-4 w-4 text-amber-400 fill-amber-400" />);
-      } else if (i === floorRating + 1 && hasHalf) {
-        stars.push(
-          <div key={i} className="relative">
-            <Star className="h-4 w-4 text-zinc-300 dark:text-zinc-700" />
-            <div className="absolute top-0 left-0 overflow-hidden w-1/2">
-              <Star className="h-4 w-4 text-amber-400 fill-amber-400" />
-            </div>
-          </div>
-        );
-      } else {
-        stars.push(<Star key={i} className="h-4 w-4 text-zinc-300 dark:text-zinc-700" />);
-      }
-    }
-    return stars;
-  };
 
   if (!results || results.length === 0) {
     return (
@@ -114,19 +86,17 @@ export default function PriceTable({ results = [], domainName = "" }) {
           >
             <option value="cheapest">Registration Price (Cheapest First)</option>
             <option value="renew">Renewal Price (Cheapest First)</option>
-            <option value="recommended">Rating & Recommended</option>
           </select>
         </div>
       </div>
 
       {/* Main Table Container */}
       <div className="w-full bg-white dark:bg-[#0f0f0f] border border-zinc-200 dark:border-zinc-850 rounded-3xl shadow-xl overflow-hidden">
-        {/* Table Header (Desktop Only) */}
-        <div className="hidden md:grid grid-cols-5 gap-4 px-6 py-4.5 border-b border-zinc-150 dark:border-zinc-850 bg-zinc-50/50 dark:bg-zinc-900/10 text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+        {/* Table Header (Desktop Only, 4-column layout) */}
+        <div className="hidden md:grid grid-cols-4 gap-4 px-6 py-4.5 border-b border-zinc-150 dark:border-zinc-850 bg-zinc-50/50 dark:bg-zinc-900/10 text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
           <div>Registrar</div>
           <div>Registration Price</div>
           <div>Renewal Price</div>
-          <div>Trust Rating</div>
           <div className="text-right">Action</div>
         </div>
 
@@ -138,7 +108,7 @@ export default function PriceTable({ results = [], domainName = "" }) {
             return (
               <div
                 key={item.id}
-                className={`grid grid-cols-1 md:grid-cols-5 items-center gap-4 p-6 hover:bg-zinc-50/50 dark:hover:bg-zinc-900/10 transition-colors duration-200 relative ${
+                className={`grid grid-cols-1 md:grid-cols-4 items-center gap-4 p-6 hover:bg-zinc-50/50 dark:hover:bg-zinc-900/10 transition-colors duration-200 relative ${
                   isCheapest ? "bg-purple-50/10 dark:bg-purple-950/5" : ""
                 }`}
               >
@@ -168,13 +138,6 @@ export default function PriceTable({ results = [], domainName = "" }) {
                         </span>
                       )}
                     </div>
-                    {/* Mobile Rating Fallback */}
-                    <div className="flex items-center gap-1 md:hidden">
-                      <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
-                      <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-                        {item.rating}
-                      </span>
-                    </div>
                   </div>
                 </div>
 
@@ -199,17 +162,7 @@ export default function PriceTable({ results = [], domainName = "" }) {
                   </span>
                 </div>
 
-                {/* Column 4: Star Rating (Desktop Only) */}
-                <div className="hidden md:flex items-center gap-2">
-                  <div className="flex items-center gap-0.5">
-                    {renderStars(item.rating)}
-                  </div>
-                  <span className="text-xs font-bold text-zinc-700 dark:text-zinc-350">
-                    ({item.rating})
-                  </span>
-                </div>
-
-                {/* Column 5: Buy Now Button */}
+                {/* Column 4: Buy Now Button */}
                 <div className="flex justify-end mt-2 md:mt-0">
                   <a
                     href={item.affiliate}
@@ -235,7 +188,7 @@ export default function PriceTable({ results = [], domainName = "" }) {
       <div className="flex items-start gap-2.5 px-4 py-3 bg-zinc-50/50 dark:bg-zinc-900/10 border border-zinc-150 dark:border-zinc-850 rounded-2xl text-[11px] text-zinc-400 leading-normal">
         <HelpCircle className="h-4 w-4 text-zinc-400 shrink-0 mt-0.5" />
         <span>
-          Registrar availability and pricing calculations are fetched live where supported. First-year promo prices often differ from standard renewal values. Disclosed ratings represent general customer sentiment indices. Affiliate links contain tracking cookies and generate small referral support fees at no extra cost to you.
+          Registrar availability and pricing calculations are fetched live where supported. First-year promo prices often differ from standard renewal values. Affiliate links contain tracking cookies and generate small referral support fees at no extra cost to you.
         </span>
       </div>
     </div>
