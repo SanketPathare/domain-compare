@@ -2,9 +2,11 @@
 import React from "react";
 import { Sparkles, ArrowRight, Tag } from "lucide-react";
 import { BACKUP_PRICES, REGISTRARS } from "@/lib/prices";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function TldPriceList({ onSelectTld }) {
   const popularTlds = ["com", "net", "org", "io", "co", "ai"];
+  const { formatPrice } = useTheme();
 
   // Helper to compile prices for a given TLD and find the cheapest registrar
   const getTldComparison = (tld) => {
@@ -63,7 +65,7 @@ export default function TldPriceList({ onSelectTld }) {
                 {cheapest && (
                   <span className="flex items-center gap-1 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase border border-emerald-100 dark:border-emerald-900/50 shadow-sm select-none">
                     <Sparkles className="h-3 w-3 animate-pulse shrink-0" />
-                    <span>${cheapest.price.toFixed(2)} at {cheapest.name}</span>
+                    <span>{formatPrice(cheapest.price)} at {cheapest.name}</span>
                   </span>
                 )}
               </div>
@@ -93,7 +95,7 @@ export default function TldPriceList({ onSelectTld }) {
                         </span>
                       </div>
                       <span className="font-mono text-zinc-950 dark:text-white">
-                        ${item.price.toFixed(2)}
+                        {formatPrice(item.price)}
                       </span>
                     </div>
                   );

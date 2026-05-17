@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sun, Moon, Menu, X, Globe } from "lucide-react";
-import { useTheme } from "./ThemeProvider";
+import { useTheme, CURRENCIES } from "./ThemeProvider";
 
 export default function Navbar() {
-  const { theme, toggleTheme, mounted } = useTheme();
+  const { theme, toggleTheme, currency, setCurrency, mounted } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -45,45 +45,62 @@ export default function Navbar() {
                 className={`text-sm font-medium transition-colors hover:text-purple-600 dark:hover:text-purple-400 ${
                   isActive(link.href)
                     ? "text-purple-600 dark:text-purple-400 font-semibold"
-                    : "text-zinc-600 dark:text-zinc-300"
+                    : "text-zinc-650 dark:text-zinc-300"
                 }`}
               >
                 {link.name}
               </Link>
             ))}
 
+            {/* Currency Selector Dropdown */}
+            <div className="relative">
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="flex items-center gap-1.5 h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0f0f0f] text-sm font-semibold text-zinc-700 dark:text-zinc-350 outline-none cursor-pointer focus:ring-1 focus:ring-purple-500 focus:border-purple-500 shadow-sm"
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c.code} value={c.code} className="dark:bg-[#0a0a0a] text-zinc-950 dark:text-white font-medium">
+                    {c.flag} {c.code} ({c.symbol})
+                  </option>
+                ))}
+              </select>
+            </div>
+
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-300 transition-all duration-200"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-650 dark:text-zinc-300 transition-all duration-200 shadow-sm shadow-zinc-100 dark:shadow-none"
             >
               {mounted && theme === "dark" ? (
                 <Sun className="h-5 w-5 text-yellow-400" />
               ) : (
-                <Moon className="h-5 w-5 text-purple-600 dark:text-zinc-300" />
+                <Moon className="h-5 w-5 text-purple-600 dark:text-zinc-350" />
               )}
             </button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden items-center gap-3">
+          <div className="flex md:hidden items-center gap-2">
+            {/* Theme Toggle Button Mobile */}
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300"
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-350"
             >
               {mounted && theme === "dark" ? (
                 <Sun className="h-4.5 w-4.5 text-yellow-400" />
               ) : (
-                <Moon className="h-4.5 w-4.5 text-purple-600 dark:text-zinc-300" />
+                <Moon className="h-4.5 w-4.5 text-purple-600 dark:text-zinc-350" />
               )}
             </button>
 
+            {/* Hamburger Open Menu */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
-              className="inline-flex items-center justify-center rounded-xl p-2 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 focus:outline-none"
+              className="inline-flex items-center justify-center rounded-xl p-2 text-zinc-600 dark:text-zinc-350 hover:bg-zinc-100 dark:hover:bg-zinc-900 focus:outline-none"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -116,6 +133,25 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            
+            {/* Mobile Currency / Base Country Selector Row */}
+            <div className="pt-3.5 pb-1 border-t border-zinc-150 dark:border-zinc-850 mt-3 px-3 flex items-center justify-between">
+              <span className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">Base Currency:</span>
+              <select
+                value={currency}
+                onChange={(e) => {
+                  setCurrency(e.target.value);
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-1 bg-white dark:bg-[#0f0f0f] border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-1.5 text-sm font-bold text-zinc-800 dark:text-zinc-200 focus:outline-none"
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c.code} value={c.code} className="dark:bg-[#0a0a0a] text-zinc-950 dark:text-white">
+                    {c.flag} {c.code} ({c.symbol})
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
       )}

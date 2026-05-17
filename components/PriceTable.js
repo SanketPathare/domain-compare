@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useMemo } from "react";
 import { Star, ArrowUpDown, ChevronDown, Check, ExternalLink, HelpCircle } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 // Helper component to render stylized brand monogram if static images are missing
 function BrandLogo({ id, name, color }) {
@@ -39,6 +40,7 @@ function BrandLogo({ id, name, color }) {
 
 export default function PriceTable({ results = [], domainName = "" }) {
   const [sortBy, setSortBy] = useState("cheapest"); // "cheapest", "renew", "recommended"
+  const { formatPrice } = useTheme();
   
   // Sort the results array based on criteria
   const sortedResults = useMemo(() => {
@@ -181,7 +183,7 @@ export default function PriceTable({ results = [], domainName = "" }) {
                   <span className="text-xs font-medium text-zinc-400 md:hidden">Registration:</span>
                   <div className="flex items-center gap-2">
                     <span className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white">
-                      ${item.register.toFixed(2)}
+                      {formatPrice(item.register)}
                     </span>
                     <span className="text-[10px] text-zinc-400 font-semibold uppercase bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded shrink-0">
                       1st Year
@@ -193,7 +195,7 @@ export default function PriceTable({ results = [], domainName = "" }) {
                 <div className="flex flex-row md:flex-col items-baseline md:items-start justify-between md:justify-center gap-1 md:gap-0">
                   <span className="text-xs font-medium text-zinc-400 md:hidden">Renewal:</span>
                   <span className="text-sm font-semibold text-zinc-800 dark:text-zinc-300">
-                    ${item.renew.toFixed(2)}<span className="text-zinc-500 font-normal">/yr</span>
+                    {formatPrice(item.renew)}<span className="text-zinc-500 font-normal">/yr</span>
                   </span>
                 </div>
 
