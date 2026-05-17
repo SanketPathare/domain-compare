@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, RefreshCw, AlertTriangle, Globe, Sparkles } from "lucide-react";
+import { ArrowLeft, RefreshCw, AlertTriangle, Globe } from "lucide-react";
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import DomainCard from "@/components/DomainCard";
@@ -98,14 +98,14 @@ function ResultsContent() {
   // Empty State: if no domain query is entered yet
   if (!domainQuery) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-20 text-center space-y-6 animate-fade-in-up">
-        <div className="h-16 w-16 bg-purple-100 dark:bg-purple-950/40 text-purple-600 rounded-full flex items-center justify-center mx-auto shadow-md">
-          <Globe className="h-8 w-8 animate-pulse" />
+      <div className="mx-auto max-w-3xl px-6 py-24 text-center space-y-6 animate-fade-in-up bg-black">
+        <div className="h-12 w-12 bg-[#0c0c0c] border border-[#222] text-white rounded-lg flex items-center justify-center mx-auto shadow-xl">
+          <Globe className="h-6 w-6 animate-pulse" />
         </div>
-        <h1 className="text-3xl font-extrabold text-zinc-900 dark:text-white">
-          Start Comparing Domain Prices
+        <h1 className="text-3xl font-extrabold text-white tracking-tighter">
+          Instant Domain Price Lookup
         </h1>
-        <p className="text-zinc-500 dark:text-zinc-400 text-sm max-w-md mx-auto">
+        <p className="text-zinc-500 text-xs max-w-sm mx-auto leading-relaxed">
           Type an idea below to instantly compare first-year registrations and renewals across top-tier registries.
         </p>
         <SearchBar placeholder="e.g. portfoliobrand" />
@@ -114,15 +114,15 @@ function ResultsContent() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8 animate-fade-in-up">
+    <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8 space-y-8 animate-fade-in-up bg-black">
       {/* Top Search bar area + back button */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-850">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1a1a1a]">
         <Link
           href="/"
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors shrink-0 group"
+          className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-zinc-500 hover:text-white transition-colors shrink-0 group select-none"
         >
-          <ArrowLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
-          <span>Back to Home</span>
+          <ArrowLeft className="h-3.5 w-3.5 group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back to Search</span>
         </Link>
         
         <div className="w-full max-w-2xl">
@@ -136,14 +136,14 @@ function ResultsContent() {
 
       {/* Error state */}
       {error && (
-        <div className="p-6 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/50 rounded-2xl flex items-start gap-4">
-          <AlertTriangle className="h-6 w-6 text-red-500 dark:text-red-400 shrink-0 mt-0.5 animate-bounce" />
+        <div className="p-6 bg-[#080808] border border-red-950/60 rounded-xl flex items-start gap-4">
+          <AlertTriangle className="h-5 w-5 text-red-500 shrink-0 mt-0.5 animate-pulse" />
           <div className="space-y-2">
-            <h3 className="font-extrabold text-red-800 dark:text-red-300">Lookup Query Failed</h3>
-            <p className="text-sm text-red-750 dark:text-red-405 leading-relaxed">{error}</p>
+            <h3 className="font-extrabold text-sm uppercase tracking-wider text-red-400">Lookup Query Failed</h3>
+            <p className="text-xs text-zinc-500 leading-relaxed">{error}</p>
             <button
               onClick={() => fetchDomainData(domainQuery)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-100 hover:bg-red-200 dark:bg-red-900/40 dark:hover:bg-red-900/60 text-xs font-bold text-red-800 dark:text-red-200 transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#111] border border-red-950 text-[10px] font-bold text-red-400 hover:bg-[#161616] transition-colors uppercase tracking-wider"
             >
               <RefreshCw className="h-3 w-3" />
               <span>Retry Lookup</span>
@@ -156,16 +156,13 @@ function ResultsContent() {
       {!error && (
         <div className="space-y-8">
           
-          {/* TLD Extension Tabs (Smart Switcher) */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-4.5 w-4.5 text-purple-600 dark:text-purple-400" />
-              <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                Switch Extensions
-              </span>
-            </div>
+          {/* TLD Extension Tabs (Smart Switcher in monochromatic nextjs style) */}
+          <div className="space-y-3.5">
+            <span className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase select-none">
+              Filter Extension
+            </span>
 
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-2">
               {filterTlds.map((ext) => {
                 const isSelected = activeTld === ext;
                 return (
@@ -173,10 +170,10 @@ function ResultsContent() {
                     key={ext}
                     onClick={() => handleExtensionSwitch(ext)}
                     disabled={loading}
-                    className={`px-4.5 py-2.5 rounded-2xl text-sm font-bold uppercase transition-all duration-200 shadow-sm border ${
+                    className={`px-4.5 py-2 rounded-lg text-xs font-bold uppercase font-mono tracking-wider transition-all duration-200 border ${
                       isSelected
-                        ? "bg-purple-600 border-purple-600 text-white shadow-purple-600/10 scale-105"
-                        : "bg-white dark:bg-[#0f0f0f] border-zinc-200 dark:border-zinc-800 hover:border-purple-500/50 dark:hover:border-purple-500/40 text-zinc-700 dark:text-zinc-300 active:scale-95 disabled:opacity-50"
+                        ? "bg-white border-white text-black scale-[1.02] shadow-md"
+                        : "bg-[#0c0c0c] border-[#222] hover:border-zinc-700 text-zinc-400 hover:text-white active:scale-95 disabled:opacity-50"
                     }`}
                   >
                     .{ext}
@@ -206,9 +203,14 @@ function ResultsContent() {
           ) : (
             pricing.length > 0 && (
               <div className="space-y-4">
-                <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
-                  Registrar Price Comparison
-                </h2>
+                <div className="border-b border-[#1a1a1a] pb-4">
+                  <span className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase select-none">
+                    Pricing Matrix
+                  </span>
+                  <h2 className="text-lg font-bold text-white mt-0.5">
+                    Registrar Comparisons
+                  </h2>
+                </div>
                 <PriceTable results={pricing} domainName={domain} />
               </div>
             )
@@ -221,7 +223,7 @@ function ResultsContent() {
 
 export default function Results() {
   return (
-    <Suspense fallback={<div className="text-center py-20 text-zinc-500 animate-pulse">Loading search params...</div>}>
+    <Suspense fallback={<div className="text-center py-24 text-zinc-500 text-xs animate-pulse tracking-widest uppercase">Initializing Lookup Engine...</div>}>
       <ResultsContent />
     </Suspense>
   );

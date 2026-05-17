@@ -4,21 +4,21 @@
 
 @layer base {
   :root {
-    --background: #0a0a0a; /* Default to sleek dark black */
-    --foreground: #f4f4f5;
-    --card: #0f0f0f;
-    --card-border: #1f1f23;
-    --accent: #a78bfa; /* Light purple for high contrast */
-    --accent-glow: rgba(167, 139, 250, 0.12);
+    --background: #000000; /* Pure Pitch Black */
+    --foreground: #fafafa; /* Crisp white */
+    --card: #080808; /* Premium charcoal */
+    --card-border: #1a1a1a; /* Super thin dark gray border */
+    --accent: #ffffff;
+    --accent-glow: rgba(255, 255, 255, 0.04);
   }
 
   .dark {
-    --background: #0a0a0a;
-    --foreground: #f4f4f5;
-    --card: #0f0f0f;
-    --card-border: #1f1f23;
-    --accent: #a78bfa;
-    --accent-glow: rgba(167, 139, 250, 0.12);
+    --background: #000000;
+    --foreground: #fafafa;
+    --card: #080808;
+    --card-border: #1a1a1a;
+    --accent: #ffffff;
+    --accent-glow: rgba(255, 255, 255, 0.04);
   }
 
   body {
@@ -26,7 +26,42 @@
     background-color: var(--background);
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
+    letter-spacing: -0.015em;
   }
+}
+
+/* Premium Next.js.org style Radial Hero Spotlight */
+.nextjs-spotlight {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1400px;
+  height: 500px;
+  background-image: radial-gradient(
+    ellipse 50% 60% at 50% -10%,
+    rgba(120, 119, 198, 0.12),
+    rgba(255, 255, 255, 0)
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nextjs-radial-card {
+  position: relative;
+}
+.nextjs-radial-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* Custom Premium Micro-Animations */
@@ -58,7 +93,7 @@
   animation: float 6s ease-in-out infinite;
 }
 
-/* Shimmer styling for custom skeletons if browser support isn't available */
+/* Shimmer styling for custom skeletons */
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
@@ -80,48 +115,29 @@
   background-image: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.03) 20%,
-    rgba(255, 255, 255, 0.08) 60%,
+    rgba(255, 255, 255, 0.01) 20%,
+    rgba(255, 255, 255, 0.03) 60%,
     rgba(255, 255, 255, 0) 100%
   );
   animation: shimmer 2s infinite;
   content: '';
 }
 
-.dark .shimmer-mask::after {
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.01) 20%,
-    rgba(255, 255, 255, 0.04) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-/* Clean Custom Scrollbar */
+/* Clean Custom Scrollbar matching Next.js.org dark gray style */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
-  border-radius: 4px;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #1f1f23;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
+  background: #2e2e33;
 }
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
-}
-

@@ -1,11 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Search, Loader2, AlertCircle } from "lucide-react";
 
-export default function SearchBar({ initialValue = "", placeholder = "Search your next domain... (e.g., myawesomeidea)", isLoading = false, onSearch }) {
+export default function SearchBar({ initialValue = "", placeholder = "Compare domain availability... (e.g., brandname)", isLoading = false, onSearch }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [query, setQuery] = useState(initialValue);
   const [error, setError] = useState("");
   const [isLocalLoading, setIsLocalLoading] = useState(false);
@@ -52,7 +51,6 @@ export default function SearchBar({ initialValue = "", placeholder = "Search you
     const validatedDomain = cleanAndValidateDomain(query);
     
     if (validatedDomain) {
-      // Sync local query display to show the normalized version
       setQuery(validatedDomain);
       setIsLocalLoading(true);
 
@@ -60,14 +58,11 @@ export default function SearchBar({ initialValue = "", placeholder = "Search you
         onSearch(validatedDomain);
         setIsLocalLoading(false);
       } else {
-        // standalone page navigation
         router.push(`/results?domain=${encodeURIComponent(validatedDomain)}`);
-        // We keep local loading true until navigation transitions
       }
     }
   };
 
-  // Reset local loading if parent loading state switches off
   useEffect(() => {
     if (!isLoading) {
       setIsLocalLoading(false);
@@ -79,16 +74,16 @@ export default function SearchBar({ initialValue = "", placeholder = "Search you
   return (
     <div className="w-full max-w-3xl mx-auto">
       <form onSubmit={handleSubmit} className="relative group">
-        {/* Glow effect on hover */}
-        <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-500 opacity-20 blur-lg transition-all duration-300 group-hover:opacity-45 group-focus-within:opacity-50"></div>
+        {/* Monochromatic Vercel spotlight outline glow on hover */}
+        <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-r from-zinc-800 to-zinc-700 opacity-20 blur-md transition-all duration-300 group-hover:opacity-60 group-focus-within:opacity-70"></div>
         
-        {/* Input Wrapper */}
-        <div className="relative flex items-center bg-white dark:bg-[#0f0f0f] border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden p-1.5 transition-all duration-200 group-focus-within:border-purple-500">
-          <div className="pl-4 text-zinc-400 dark:text-zinc-500">
+        {/* Input Wrapper - nextjs.org command bar search style */}
+        <div className="relative flex items-center bg-[#0a0a0a] border border-[#222] rounded-xl shadow-2xl overflow-hidden p-1 transition-all duration-200 group-focus-within:border-zinc-400 group-focus-within:bg-[#0c0c0c]">
+          <div className="pl-3.5 text-zinc-500">
             {activeLoading ? (
-              <Loader2 className="h-5 w-5 animate-spin text-purple-500" />
+              <Loader2 className="h-4.5 w-4.5 animate-spin text-white" />
             ) : (
-              <Search className="h-5 w-5 text-zinc-400 group-focus-within:text-purple-500 transition-colors" />
+              <Search className="h-4.5 w-4.5 text-zinc-500 group-focus-within:text-white transition-colors" />
             )}
           </div>
 
@@ -100,14 +95,19 @@ export default function SearchBar({ initialValue = "", placeholder = "Search you
               if (error) setError("");
             }}
             placeholder={placeholder}
-            className="w-full px-3 py-3.5 bg-transparent border-0 outline-none text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 font-medium text-base sm:text-lg focus:ring-0"
+            className="w-full px-3 py-3 bg-transparent border-0 outline-none text-white placeholder-zinc-650 font-medium text-sm sm:text-base focus:ring-0"
             disabled={activeLoading}
           />
+
+          {/* Monospace Keyboard Hint */}
+          <div className="hidden sm:flex items-center gap-1 mr-3 text-[10px] font-mono text-zinc-600 bg-[#161616] px-1.5 py-0.5 rounded border border-[#222] select-none">
+            <span>Enter</span>
+          </div>
 
           <button
             type="submit"
             disabled={activeLoading}
-            className="flex items-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-all duration-200 shadow-md shadow-purple-600/20 active:scale-95 disabled:opacity-75 disabled:cursor-not-allowed text-sm sm:text-base whitespace-nowrap"
+            className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm whitespace-nowrap shadow-sm"
           >
             {activeLoading ? "Searching..." : "Compare"}
           </button>
@@ -116,9 +116,9 @@ export default function SearchBar({ initialValue = "", placeholder = "Search you
 
       {/* Validation Error Message */}
       {error && (
-        <div className="mt-3 flex items-center gap-2 text-red-500 dark:text-red-400 text-sm pl-2 animate-bounce">
-          <AlertCircle className="h-4 w-4" />
-          <span>{error}</span>
+        <div className="mt-3 flex items-center gap-2 text-zinc-400 text-xs pl-2">
+          <AlertCircle className="h-3.5 w-3.5 text-red-500" />
+          <span className="font-mono text-red-500">{error}</span>
         </div>
       )}
     </div>
