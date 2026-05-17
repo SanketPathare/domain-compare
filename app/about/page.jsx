@@ -117,7 +117,7 @@ export default function About() {
           </div>
           <Link
             href="/"
-            className="px-5 py-3 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold text-xs transition-all duration-150 shrink-0 text-center shadow-sm select-none"
+            className="flex items-center justify-center px-5 py-3 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold text-xs transition-all duration-150 shrink-0 text-center shadow-sm select-none w-full md:w-auto"
           >
             Compare Domains
           </Link>

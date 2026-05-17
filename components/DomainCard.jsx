@@ -69,11 +69,11 @@ export default function DomainCard({ domain = "", available = false, suggestions
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center w-full sm:w-auto gap-2 shrink-0">
             {/* Copy Button */}
             <button
               onClick={handleCopyDomain}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#222] bg-[#0c0c0c] hover:bg-[#111] text-zinc-300 font-bold text-xs transition-all duration-150 active:scale-95 shadow-sm"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg border border-[#222] bg-[#0c0c0c] hover:bg-[#111] text-zinc-300 font-bold text-xs transition-all duration-150 active:scale-95 shadow-sm w-full sm:w-auto select-none"
               title="Copy domain name"
             >
               {copiedDomain ? (
@@ -92,7 +92,7 @@ export default function DomainCard({ domain = "", available = false, suggestions
             {/* Share Button */}
             <button
               onClick={handleShareResults}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold text-xs transition-all duration-150 active:scale-95 shadow-md"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold text-xs transition-all duration-150 active:scale-95 shadow-md w-full sm:w-auto select-none"
               title="Copy share results link"
             >
               {copiedShare ? (

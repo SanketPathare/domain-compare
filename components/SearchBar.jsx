@@ -79,11 +79,11 @@ export default function SearchBar({ initialValue = "", placeholder = "Compare do
         
         {/* Input Wrapper - nextjs.org command bar search style */}
         <div className="relative flex items-center bg-[#0a0a0a] border border-[#222] rounded-xl shadow-2xl overflow-hidden p-1 transition-all duration-200 group-focus-within:border-zinc-400 group-focus-within:bg-[#0c0c0c]">
-          <div className="pl-3.5 text-zinc-500">
+          <div className="pl-3 text-zinc-500 shrink-0">
             {activeLoading ? (
-              <Loader2 className="h-4.5 w-4.5 animate-spin text-white" />
+              <Loader2 className="h-4 w-4 animate-spin text-white" />
             ) : (
-              <Search className="h-4.5 w-4.5 text-zinc-500 group-focus-within:text-white transition-colors" />
+              <Search className="h-4 w-4 text-zinc-500 group-focus-within:text-white transition-colors" />
             )}
           </div>
 
@@ -95,19 +95,19 @@ export default function SearchBar({ initialValue = "", placeholder = "Compare do
               if (error) setError("");
             }}
             placeholder={placeholder}
-            className="w-full px-3 py-3 bg-transparent border-0 outline-none text-white placeholder-zinc-650 font-medium text-sm sm:text-base focus:ring-0"
+            className="w-full px-2 sm:px-3 py-2.5 sm:py-3 bg-transparent border-0 outline-none text-white placeholder-zinc-650 font-medium text-xs sm:text-sm md:text-base focus:ring-0"
             disabled={activeLoading}
           />
 
           {/* Monospace Keyboard Hint */}
-          <div className="hidden sm:flex items-center gap-1 mr-3 text-[10px] font-mono text-zinc-600 bg-[#161616] px-1.5 py-0.5 rounded border border-[#222] select-none">
+          <div className="hidden md:flex items-center gap-1 mr-3 text-[10px] font-mono text-zinc-600 bg-[#161616] px-1.5 py-0.5 rounded border border-[#222] select-none">
             <span>Enter</span>
           </div>
 
           <button
             type="submit"
             disabled={activeLoading}
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm whitespace-nowrap shadow-sm"
+            className="flex items-center justify-center gap-1 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold transition-all duration-150 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-[10px] sm:text-xs md:text-sm whitespace-nowrap shadow-sm shrink-0"
           >
             {activeLoading ? "Searching..." : "Compare"}
           </button>

@@ -143,7 +143,7 @@ function ResultsContent() {
             <p className="text-xs text-zinc-500 leading-relaxed">{error}</p>
             <button
               onClick={() => fetchDomainData(domainQuery)}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#111] border border-red-950 text-[10px] font-bold text-red-400 hover:bg-[#161616] transition-colors uppercase tracking-wider"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#111] border border-red-950 text-[10px] font-bold text-red-400 hover:bg-[#161616] transition-colors uppercase tracking-wider w-full sm:w-auto select-none"
             >
               <RefreshCw className="h-3 w-3" />
               <span>Retry Lookup</span>
