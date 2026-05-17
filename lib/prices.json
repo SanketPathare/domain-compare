@@ -1,0 +1,74 @@
+{
+  "registrars": [
+    {
+      "name": "Porkbun",
+      "id": "porkbun",
+      "badge": "CHEAPEST",
+      "rating": 4.8,
+      "color": "#f97316",
+      "baseAffiliateUrl": "https://porkbun.com/checkout/register",
+      "api": "live"
+    },
+    {
+      "name": "Namecheap",
+      "id": "namecheap",
+      "badge": "POPULAR",
+      "rating": 4.7,
+      "color": "#ef4444",
+      "baseAffiliateUrl": "https://www.namecheap.com/domains/registration/results/",
+      "api": "hardcoded"
+    },
+    {
+      "name": "GoDaddy",
+      "id": "godaddy",
+      "badge": "TRUSTED",
+      "rating": 4.5,
+      "color": "#22c55e",
+      "baseAffiliateUrl": "https://www.godaddy.com/domainsearch/find",
+      "api": "live"
+    },
+    {
+      "name": "Hostinger",
+      "id": "hostinger",
+      "badge": "BEST VALUE",
+      "rating": 4.6,
+      "color": "#a855f7",
+      "baseAffiliateUrl": "https://www.hostinger.com/domain-name-search",
+      "api": "hardcoded"
+    }
+  ],
+  "backupPrices": {
+    "porkbun": {
+      "com": { "register": 8.49, "renew": 10.99 },
+      "net": { "register": 9.49, "renew": 11.99 },
+      "org": { "register": 9.49, "renew": 11.99 },
+      "io":  { "register": 39.99, "renew": 44.99 },
+      "co":  { "register": 9.99, "renew": 24.99 },
+      "ai":  { "register": 79.99, "renew": 84.99 }
+    },
+    "namecheap": {
+      "com": { "register": 8.99, "renew": 13.99 },
+      "net": { "register": 12.99, "renew": 14.99 },
+      "org": { "register": 9.99, "renew": 13.99 },
+      "io":  { "register": 39.99, "renew": 49.99 },
+      "co":  { "register": 9.99, "renew": 26.99 },
+      "ai":  { "register": 89.99, "renew": 94.99 }
+    },
+    "godaddy": {
+      "com": { "register": 11.99, "renew": 21.99 },
+      "net": { "register": 12.99, "renew": 22.99 },
+      "org": { "register": 9.99, "renew": 22.99 },
+      "io":  { "register": 44.99, "renew": 54.99 },
+      "co":  { "register": 14.99, "renew": 29.99 },
+      "ai":  { "register": 99.99, "renew": 109.99 }
+    },
+    "hostinger": {
+      "com": { "register": 9.99, "renew": 14.99 },
+      "net": { "register": 9.99, "renew": 14.99 },
+      "org": { "register": 9.99, "renew": 14.99 },
+      "io":  { "register": 39.99, "renew": 49.99 },
+      "co":  { "register": 9.99, "renew": 24.99 },
+      "ai":  { "register": 79.99, "renew": 89.99 }
+    }
+  }
+}
