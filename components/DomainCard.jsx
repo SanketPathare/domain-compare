@@ -119,7 +119,7 @@ export default function DomainCard({ domain = "", available = false, suggestions
             : "border-[#1a1a1a]"
         }`}>
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="h-4.5 w-4.5 text-white" />
+            <Sparkles className="h-4 w-4 text-white" />
             <h2 className="text-sm font-bold text-white uppercase tracking-wider">
               {!available ? "Recommended Alternatives" : "Other Variations"}
             </h2>

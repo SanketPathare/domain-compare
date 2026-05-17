@@ -15,17 +15,17 @@ export default function Home() {
 
   const features = [
     {
-      icon: <Zap className="h-4.5 w-4.5 text-white" />,
+      icon: <Zap className="h-4 w-4 text-white" />,
       title: "Real-Time Queries",
       desc: "Instant live availability checks and renewal rate lookups powered by GoDaddy & Porkbun API interfaces."
     },
     {
-      icon: <Flame className="h-4.5 w-4.5 text-white" />,
+      icon: <Flame className="h-4 w-4 text-white" />,
       title: "Monochromatic Grid",
       desc: "Compare registrar registration and renewal fees globally in USD, INR, EUR, or GBP."
     },
     {
-      icon: <ShieldCheck className="h-4.5 w-4.5 text-white" />,
+      icon: <ShieldCheck className="h-4 w-4 text-white" />,
       title: "Direct Registrar Checkout",
       desc: "We route you directly to provider shopping panels pre-populated with affiliate UTM discount codes."
     }

@@ -165,7 +165,7 @@ export default function PriceTable({ results = [], domainName = "" }) {
                     href={item.affiliate}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 w-full md:w-auto px-4.5 py-2 rounded-lg font-bold text-xs bg-white hover:bg-zinc-200 text-black transition-all duration-150 active:scale-95 text-center shadow-sm select-none"
+                    className="flex items-center justify-center gap-1.5 w-full md:w-auto px-5 py-2.5 rounded-lg font-bold text-xs bg-white hover:bg-zinc-200 text-black transition-all duration-150 active:scale-95 text-center shadow-sm select-none"
                   >
                     <span>Register</span>
                     <ExternalLink className="h-3 w-3 shrink-0" />

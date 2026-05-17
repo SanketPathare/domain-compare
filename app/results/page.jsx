@@ -170,7 +170,7 @@ function ResultsContent() {
                     key={ext}
                     onClick={() => handleExtensionSwitch(ext)}
                     disabled={loading}
-                    className={`px-4.5 py-2 rounded-lg text-xs font-bold uppercase font-mono tracking-wider transition-all duration-200 border ${
+                    className={`px-4 py-2.5 rounded-lg text-xs font-bold uppercase font-mono tracking-wider transition-all duration-200 border ${
                       isSelected
                         ? "bg-white border-white text-black scale-[1.02] shadow-md"
                         : "bg-[#0c0c0c] border-[#222] hover:border-zinc-700 text-zinc-400 hover:text-white active:scale-95 disabled:opacity-50"

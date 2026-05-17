@@ -13,17 +13,17 @@ export default function About() {
 
   const values = [
     {
-      icon: <ShieldCheck className="h-4.5 w-4.5 text-white" />,
+      icon: <ShieldCheck className="h-4 w-4 text-white" />,
       title: "Complete Price Integrity",
       desc: "We show both first-year registration promos and subsequent renewal fees, making sure there are zero hidden renewal surprises."
     },
     {
-      icon: <Sparkles className="h-4.5 w-4.5 text-white" />,
+      icon: <Sparkles className="h-4 w-4 text-white" />,
       title: "Real-Time Fetching",
       desc: "Our platform queries direct APIs so you don't have to rely on stale, pre-cached databases when checking registrar deals."
     },
     {
-      icon: <Users className="h-4.5 w-4.5 text-white" />,
+      icon: <Users className="h-4 w-4 text-white" />,
       title: "Independent & Free",
       desc: "DomainCompare is completely free to use. We do not sell domains or prioritize high-paying bidders. The cheapest price always wins."
     }

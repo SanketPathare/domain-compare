@@ -97,7 +97,7 @@ export default function Blog() {
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4.5 py-2 rounded-lg text-xs font-bold transition-all duration-150 border ${
+              className={`px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-150 border ${
                 isSelected
                   ? "bg-white border-white text-black"
                   : "bg-[#0c0c0c] border-[#222] text-zinc-400 hover:border-zinc-700 hover:text-white"
@@ -190,7 +190,7 @@ export default function Blog() {
             <div className="flex justify-end pt-2 w-full">
               <button
                 onClick={() => setPreviewArticle(null)}
-                className="flex items-center justify-center px-4.5 py-2 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold text-xs transition-all select-none w-full sm:w-auto"
+                className="flex items-center justify-center px-5 py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-black font-extrabold text-xs transition-all select-none w-full sm:w-auto"
               >
                 Close Preview
               </button>
