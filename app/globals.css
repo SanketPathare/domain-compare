@@ -4,20 +4,20 @@
 
 @layer base {
   :root {
-    --background: #fcfcfc;
-    --foreground: #0f0f11;
-    --card: #ffffff;
-    --card-border: #e4e4e7;
-    --accent: #7c3aed; /* Deep purple */
-    --accent-glow: rgba(124, 58, 237, 0.15);
-  }
-
-  .dark {
-    --background: #0a0a0a; /* Sleek black requested */
+    --background: #0a0a0a; /* Default to sleek dark black */
     --foreground: #f4f4f5;
     --card: #0f0f0f;
     --card-border: #1f1f23;
     --accent: #a78bfa; /* Light purple for high contrast */
+    --accent-glow: rgba(167, 139, 250, 0.12);
+  }
+
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #f4f4f5;
+    --card: #0f0f0f;
+    --card-border: #1f1f23;
+    --accent: #a78bfa;
     --accent-glow: rgba(167, 139, 250, 0.12);
   }
 

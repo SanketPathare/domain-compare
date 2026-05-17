@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sun, Moon, Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { useTheme, CURRENCIES } from "./ThemeProvider";
 
 export default function Navbar() {
-  const { theme, toggleTheme, currency, setCurrency, mounted } = useTheme();
+  const { currency, setCurrency } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -57,7 +57,7 @@ export default function Navbar() {
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className="flex items-center gap-1.5 h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0f0f0f] text-sm font-semibold text-zinc-700 dark:text-zinc-350 outline-none cursor-pointer focus:ring-1 focus:ring-purple-500 focus:border-purple-500 shadow-sm"
+                className="flex items-center gap-1.5 h-10 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0f0f0f] text-sm font-semibold text-zinc-700 dark:text-zinc-355 outline-none cursor-pointer focus:ring-1 focus:ring-purple-500 focus:border-purple-500 shadow-sm"
               >
                 {CURRENCIES.map((c) => (
                   <option key={c.code} value={c.code} className="dark:bg-[#0a0a0a] text-zinc-950 dark:text-white font-medium">
@@ -66,36 +66,10 @@ export default function Navbar() {
                 ))}
               </select>
             </div>
-
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-650 dark:text-zinc-300 transition-all duration-200 shadow-sm shadow-zinc-100 dark:shadow-none"
-            >
-              {mounted && theme === "dark" ? (
-                <Sun className="h-5 w-5 text-yellow-400" />
-              ) : (
-                <Moon className="h-5 w-5 text-purple-600 dark:text-zinc-350" />
-              )}
-            </button>
           </div>
 
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center gap-2">
-            {/* Theme Toggle Button Mobile */}
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-350"
-            >
-              {mounted && theme === "dark" ? (
-                <Sun className="h-4.5 w-4.5 text-yellow-400" />
-              ) : (
-                <Moon className="h-4.5 w-4.5 text-purple-600 dark:text-zinc-350" />
-              )}
-            </button>
-
             {/* Hamburger Open Menu */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -127,7 +101,7 @@ export default function Navbar() {
                 className={`block rounded-xl px-3 py-2 text-base font-medium transition-all ${
                   isActive(link.href)
                     ? "bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 font-semibold"
-                    : "text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                    : "text-zinc-655 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                 }`}
               >
                 {link.name}

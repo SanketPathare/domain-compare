@@ -25,16 +25,10 @@ export function ThemeProvider({ children }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // 1. Determine starting theme
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      setTheme(storedTheme);
-      applyThemeClass(storedTheme);
-    } else {
-      setTheme("dark");
-      applyThemeClass("dark");
-      localStorage.setItem("theme", "dark");
-    }
+    // 1. Permanently lock the application inside the sleek dark mode
+    document.documentElement.classList.add("dark");
+    setTheme("dark");
+    localStorage.setItem("theme", "dark");
 
     // 2. Determine starting country/currency preference
     const storedCurrency = localStorage.getItem("currency");
@@ -47,21 +41,6 @@ export function ThemeProvider({ children }) {
 
     setMounted(true);
   }, []);
-
-  const applyThemeClass = (currentTheme) => {
-    if (currentTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
-
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    applyThemeClass(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
 
   const setCurrency = (code) => {
     if (CURRENCIES.some(c => c.code === code)) {
@@ -77,7 +56,6 @@ export function ThemeProvider({ children }) {
     if (usdPrice === null || usdPrice === undefined) return "N/A";
     const converted = (usdPrice * activeCurrencyObj.rate).toFixed(2);
     
-    // Add comma formatting for large numbers if needed (e.g. INR lakhs / thousands)
     const formattedNum = parseFloat(converted).toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
@@ -85,6 +63,9 @@ export function ThemeProvider({ children }) {
 
     return `${activeCurrencyObj.symbol}${formattedNum}`;
   };
+
+  // ToggleTheme is preserved as a simple no-op for backward compatibility
+  const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider
